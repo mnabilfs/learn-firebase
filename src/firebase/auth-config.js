@@ -1,24 +1,40 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import firebase from "firebase/compat/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDB_k7w8bDFH5L36txgFLhSOl3Q0mX9X0M",
-  authDomain: "authentication-tutorial-d1483.firebaseapp.com",
-  projectId: "authentication-tutorial-d1483",
-  storageBucket: "authentication-tutorial-d1483.firebasestorage.app",
-  messagingSenderId: "812682116831",
-  appId: "1:812682116831:web:a57f41fcc731706685b36a",
-  measurementId: "G-FHNBCFV9T7"
+  apiKey: "AIzaSyAQ0PA97mSf052MlLfxXeHOhvecdGy2N-I",
+  authDomain: "auth-413a5.firebaseapp.com",
+  projectId: "auth-413a5",
+  storageBucket: "auth-413a5.firebasestorage.app",
+  messagingSenderId: "739565640027",
+  appId: "1:739565640027:web:9767d41ab8cb64c828627e",
 };
-
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const authentication = getAuth(app);
-const analytics = getAnalytics(app);
+export const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+export const signInWithGoogle = () => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      const name = result.user.displayName
+      const email = result.user.email
+      const profilePic = result.user.photoURL
+
+      localStorage.setItem("name", name)
+      localStorage.setItem("email", email)
+      localStorage.setItem("profilePic", profilePic)
+      console.log("ProfilePic URL:", localStorage.getItem("profilePic"));
+
+
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};

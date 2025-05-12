@@ -1,7 +1,8 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Auth from "./pages/auth";
+// import Auth from "./pages/auth";
+import AuthGoogle from "./pages/AuthGoogle";
 
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
     <>
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Auth />}/>
+      <Route path="/" element={<AuthGoogle />}/>
     </Routes>
     </BrowserRouter>
     </>
